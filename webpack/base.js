@@ -1,4 +1,3 @@
-import { resolve } from 'path'
 import {
     isDevServer,
     isProd
@@ -7,10 +6,21 @@ import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import webpack from 'webpack'
 import { fileURLToPath } from 'url';
-import { dirname } from 'path'
+import {
+    dirname,
+    resolve
+} from 'path'
+import { TsconfigPathsPlugin } from 'tsconfig-paths-webpack-plugin'
 import { url } from './conf/server.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
+const extensions = [
+    '.tsx',
+    '.ts',
+    '.js',
+    '.css',
+    '.json'
+]
 
 export default {
     mode: isProd ? 'production' : 'development',
@@ -71,14 +81,15 @@ export default {
         })
     ],
     resolve: {
-        extensions: [
-            '.tsx',
-            '.ts',
-            '.js',
-            '.css'
-        ]
+        plugins: [
+            new TsconfigPathsPlugin({
+                configFile: resolve(__dirname, '../tsconfig.json'),
+                extensions
+            })
+        ],
+        aliasFields: ['browser'],
+        extensions
     },
-    //stats: 'errors-only',
     optimization: {
         runtimeChunk: true,
         splitChunks: {

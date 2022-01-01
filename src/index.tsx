@@ -1,5 +1,5 @@
 import { render } from 'react-dom'
-import { App } from './app/App'
+import { App } from '@/App'
 
 import 'antd/dist/antd.dark.css'
 

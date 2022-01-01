@@ -20,7 +20,18 @@
         "lib": [
             "esnext",
             "dom"
-        ],      
+        ],
+        "baseUrl": "src",
+        "paths": {
+            "@/*": ["*"],
+            "@components/*": ["components/*"],
+            "@hooks/*": ["hooks/*"],
+            "@assets/*": ["assets/*"],
+            "@pages/*": ["pages/*"],
+            "@services/*": ["services/*"],
+            "@shared/*": ["shared/*"],
+            "@utils/*": ["utils/*"],
+        }
     },
     "include": ["src"],
     "exclude": [
